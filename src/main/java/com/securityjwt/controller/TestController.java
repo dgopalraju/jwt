@@ -36,11 +36,11 @@ public class TestController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> addEmployee(@RequestBody Employee employee,
 			@RequestHeader(value = "TraceID", defaultValue = "") String traceId) throws Exception {
-		log.info("Employee Details:::::{}", employee.toString());
+		log.info("Employee Details::::::::{}", employee.toString());
 		log.info("traceId value=====>>>" + traceId);
 		if (traceId.isEmpty()) {
 			traceId = UUID.randomUUID().toString();
-			log.info("traceId value=====>>>" + traceId);
+			log.info("traceId value=======>>>" + traceId);
 		}
 		if (!employeeService.getAllEmployeesId().contains(employee.getEmpId()))
 			return new ResponseEntity<Employee>(employeeService.addEmployee(employee), HttpStatus.CREATED);
@@ -77,7 +77,7 @@ public class TestController {
 		if (employee != null)
 			return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 		else
-			return new ResponseEntity<BusinessException>(
+			return new ResponseEntity<BusinessException>( 
 					new BusinessException(404, "Employee not found", UUID.randomUUID().toString()),
 					HttpStatus.NOT_FOUND);
 	}
